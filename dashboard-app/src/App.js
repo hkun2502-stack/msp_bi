@@ -5,7 +5,6 @@ import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, L
 const DashboardPrototype = () => {
   const [selectedTab, setSelectedTab] = useState('overview');
 
-  // 指标卡组件
   const MetricCard = ({ title, value, change, trend, icon: Icon, subtitle }) => (
     <div className="bg-white rounded-lg shadow p-5 hover:shadow-lg transition-shadow h-full">
       <div className="flex items-start justify-between">
@@ -36,7 +35,6 @@ const DashboardPrototype = () => {
     </div>
   );
 
-  // 筛选器组件
   const FilterPanel = ({ filters }) => (
     <div className="bg-white rounded-lg shadow p-4 mb-6">
       <div className="flex items-center justify-between mb-4">
@@ -59,7 +57,6 @@ const DashboardPrototype = () => {
     </div>
   );
 
-  // 转化漏斗组件（仅报名→参考→持证）
   const FunnelChart = () => {
     const stages = [
       { name: '总报名人数', value: 8200, percent: 100, rate: '-' },
@@ -80,8 +77,10 @@ const DashboardPrototype = () => {
                   <span className="text-xs text-gray-500 ml-2">({stage.percent}%)</span>
                 </div>
               </div>
-              <div className="relative h-14 bg-gradient-to-r from-blue-600 to-blue-400 rounded-lg flex items-center justify-center text-white font-semibold shadow-sm"
-                   style={{ width: `${Math.max(stage.percent, 20)}%`, minWidth: '150px' }}>
+              <div 
+                className="relative h-14 bg-gradient-to-r from-blue-600 to-blue-400 rounded-lg flex items-center justify-center text-white font-semibold shadow-sm"
+                style={{ width: `${Math.max(stage.percent, 20)}%`, minWidth: '150px' }}
+              >
                 <span className="text-lg">{stage.value.toLocaleString()}</span>
               </div>
               {index < stages.length - 1 && (
@@ -106,7 +105,6 @@ const DashboardPrototype = () => {
     );
   };
 
-  // 用户来源分布数据
   const userSourceData = [
     { name: '官网直接访问', value: 3200 },
     { name: '微信公众号', value: 2800 },
@@ -116,7 +114,6 @@ const DashboardPrototype = () => {
     { name: '搜索引擎', value: 750 }
   ];
 
-  // 日均新增学习人数数据
   const dailyLearningData = [
     { date: '11-22', count: 145 },
     { date: '11-23', count: 168 },
@@ -127,7 +124,6 @@ const DashboardPrototype = () => {
     { date: '11-28', count: 195 }
   ];
 
-  // 学习进度分布数据
   const progressData = [
     { range: '0-25%', count: 1850 },
     { range: '25-50%', count: 2340 },
@@ -135,7 +131,6 @@ const DashboardPrototype = () => {
     { range: '75-100%', count: 3330 }
   ];
 
-  // 报名趋势数据
   const registrationTrendData = [
     { date: '11-22', count: 112 },
     { date: '11-23', count: 135 },
@@ -146,7 +141,6 @@ const DashboardPrototype = () => {
     { date: '11-28', count: 156 }
   ];
 
-  // 认证报名分布数据
   const certificationData = [
     { name: '云计算架构师', count: 2450 },
     { name: '数据分析师', count: 2180 },
@@ -154,7 +148,6 @@ const DashboardPrototype = () => {
     { name: 'AI工程师', count: 1750 }
   ];
 
-  // 分数段分布数据
   const scoreData = [
     { range: '0-60', count: 580 },
     { range: '60-70', count: 1240 },
@@ -163,7 +156,6 @@ const DashboardPrototype = () => {
     { range: '90-100', count: 1030 }
   ];
 
-  // 考试成绩趋势数据
   const examScoreTrendData = [
     { date: '11-22', score: 77.5 },
     { date: '11-23', score: 78.2 },
@@ -174,7 +166,6 @@ const DashboardPrototype = () => {
     { date: '11-28', score: 79.3 }
   ];
 
-  // 发证趋势数据
   const certificateTrendData = [
     { date: '11-22', count: 95 },
     { date: '11-23', count: 108 },
@@ -185,7 +176,6 @@ const DashboardPrototype = () => {
     { date: '11-28', count: 120 }
   ];
 
-  // 证书科目分布数据
   const certSubjectData = [
     { name: '云计算架构师', count: 1980 },
     { name: '数据分析师', count: 1750 },
@@ -193,7 +183,6 @@ const DashboardPrototype = () => {
     { name: 'AI工程师', count: 850 }
   ];
 
-  // 持证用户来源分布数据
   const certUserSourceData = [
     { name: '官网直接访问', value: 2150 },
     { name: '微信公众号', value: 1820 },
@@ -204,7 +193,6 @@ const DashboardPrototype = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* 顶部导航栏 */}
       <div className="bg-white shadow-sm border-b sticky top-0 z-10">
         <div className="max-w-full mx-auto px-6 py-4">
           <div className="flex items-center justify-between mb-4">
@@ -243,42 +231,20 @@ const DashboardPrototype = () => {
         </div>
       </div>
 
-      {/* 主内容区 */}
       <div className="max-w-full mx-auto px-6 py-6">
-        
-        {/* 总览页面 */}
         {selectedTab === 'overview' && (
           <>
-            {/* 核心指标卡片 - 4个关键指标平分列宽 */}
             <div className="grid grid-cols-4 gap-6 mb-6">
-              <MetricCard 
-                title="总学习人数" 
-                value="10,500" 
-                icon={BookOpen}
-              />
-              <MetricCard 
-                title="总报名人数" 
-                value="8,200" 
-                icon={FileCheck}
-              />
-              <MetricCard 
-                title="总参考人数" 
-                value="7,380" 
-                icon={Users}
-              />
-              <MetricCard 
-                title="总持证人数" 
-                value="6,100" 
-                icon={Award}
-              />
+              <MetricCard title="总学习人数" value="10,500" icon={BookOpen} />
+              <MetricCard title="总报名人数" value="8,200" icon={FileCheck} />
+              <MetricCard title="总参考人数" value="7,380" icon={Users} />
+              <MetricCard title="总持证人数" value="6,100" icon={Award} />
             </div>
 
-            {/* 转化漏斗 */}
             <div className="mb-6">
               <FunnelChart />
             </div>
 
-            {/* 用户来源分布 */}
             <div className="bg-white rounded-lg shadow p-6">
               <h3 className="text-lg font-semibold text-gray-800 mb-4">用户来源分布</h3>
               <ResponsiveContainer width="100%" height={320}>
@@ -294,10 +260,8 @@ const DashboardPrototype = () => {
           </>
         )}
 
-        {/* 学习阶段页面 */}
         {selectedTab === 'learning' && (
           <>
-            {/* 筛选器 */}
             <FilterPanel filters={[
               { label: '学习时间', default: '2025-04-01至今' },
               { label: '认证名称', default: '全部' },
@@ -306,36 +270,13 @@ const DashboardPrototype = () => {
               { label: '用户来源三级', default: '全部' }
             ]} />
 
-            {/* 学习指标卡片 - 4个平分列宽 */}
             <div className="grid grid-cols-4 gap-6 mb-6">
-              <MetricCard 
-                title="总学习人数" 
-                value="10,500" 
-                icon={BookOpen}
-                subtitle="开始学习的考生总数"
-              />
-              <MetricCard 
-                title="当前活跃学习人数" 
-                value="3,420" 
-                change="+15.3%" 
-                trend="up"
-                subtitle="本周期内有学习行为"
-              />
-              <MetricCard 
-                title="人均学习时长" 
-                value="142分钟" 
-                subtitle="所有考生平均"
-              />
-              <MetricCard 
-                title="学习完成率" 
-                value="72.5%" 
-                change="+3.8%" 
-                trend="up"
-                subtitle="完成全部课时的占比"
-              />
+              <MetricCard title="总学习人数" value="10,500" icon={BookOpen} subtitle="开始学习的考生总数" />
+              <MetricCard title="当前活跃学习人数" value="3,420" change="+15.3%" trend="up" subtitle="本周期内有学习行为" />
+              <MetricCard title="人均学习时长" value="142分钟" subtitle="所有考生平均" />
+              <MetricCard title="学习完成率" value="72.5%" change="+3.8%" trend="up" subtitle="完成全部课时的占比" />
             </div>
 
-            {/* 图表区域 */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div className="bg-white rounded-lg shadow p-6">
                 <h3 className="text-lg font-semibold text-gray-800 mb-4">日均新增学习人数</h3>
@@ -367,10 +308,8 @@ const DashboardPrototype = () => {
           </>
         )}
 
-        {/* 报名阶段页面 */}
         {selectedTab === 'registration' && (
           <>
-            {/* 筛选器 */}
             <FilterPanel filters={[
               { label: '报名时间', default: '2025-04-01至今' },
               { label: '认证名称', default: '全部' },
@@ -379,31 +318,12 @@ const DashboardPrototype = () => {
               { label: '用户来源三级', default: '全部' }
             ]} />
 
-            {/* 报名指标卡片 - 平分列宽 */}
             <div className="grid grid-cols-3 gap-6 mb-6">
-              <MetricCard 
-                title="总报名人数" 
-                value="8,200" 
-                icon={FileCheck}
-                subtitle="报名参加考试的总人数"
-              />
-              <MetricCard 
-                title="学习转报名率" 
-                value="78.1%" 
-                change="+2.3%" 
-                trend="up"
-                subtitle="学习后报名的转化率"
-              />
-              <MetricCard 
-                title="本周新增报名" 
-                value="884" 
-                change="+8.5%" 
-                trend="up"
-                subtitle="本周新增报名人数"
-              />
+              <MetricCard title="总报名人数" value="8,200" icon={FileCheck} subtitle="报名参加考试的总人数" />
+              <MetricCard title="学习转报名率" value="78.1%" change="+2.3%" trend="up" subtitle="学习后报名的转化率" />
+              <MetricCard title="本周新增报名" value="884" change="+8.5%" trend="up" subtitle="本周新增报名人数" />
             </div>
 
-            {/* 图表区域 */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div className="bg-white rounded-lg shadow p-6">
                 <h3 className="text-lg font-semibold text-gray-800 mb-4">报名趋势</h3>
@@ -435,10 +355,8 @@ const DashboardPrototype = () => {
           </>
         )}
 
-        {/* 考试结果页面 */}
         {selectedTab === 'exam' && (
           <>
-            {/* 筛选器 */}
             <FilterPanel filters={[
               { label: '考试时间', default: '2025-04-01至今' },
               { label: '认证名称', default: '全部' },
@@ -447,34 +365,13 @@ const DashboardPrototype = () => {
               { label: '用户来源三级', default: '全部' }
             ]} />
 
-            {/* 考试指标卡片 - 4个平分列宽 */}
             <div className="grid grid-cols-4 gap-6 mb-6">
-              <MetricCard 
-                title="总参考人数" 
-                value="7,380" 
-                icon={Users}
-                subtitle="实际参加考试的总人数"
-              />
-              <MetricCard 
-                title="考试通过率" 
-                value="82.7%" 
-                change="+2.4%" 
-                trend="up"
-                subtitle="考试合格人数占比"
-              />
-              <MetricCard 
-                title="平均分数" 
-                value="79.3分" 
-                subtitle="所有考生平均考试分数"
-              />
-              <MetricCard 
-                title="代金券发放总数" 
-                value="2,850" 
-                subtitle="已发放的代金券数量"
-              />
+              <MetricCard title="总参考人数" value="7,380" icon={Users} subtitle="实际参加考试的总人数" />
+              <MetricCard title="考试通过率" value="82.7%" change="+2.4%" trend="up" subtitle="考试合格人数占比" />
+              <MetricCard title="平均分数" value="79.3分" subtitle="所有考生平均考试分数" />
+              <MetricCard title="代金券发放总数" value="2,850" subtitle="已发放的代金券数量" />
             </div>
 
-            {/* 代金券专项指标 */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
               <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg shadow p-6 border-2 border-green-200">
                 <div className="flex items-center justify-between mb-4">
@@ -519,7 +416,6 @@ const DashboardPrototype = () => {
               </div>
             </div>
 
-            {/* 图表区域 */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div className="bg-white rounded-lg shadow p-6">
                 <h3 className="text-lg font-semibold text-gray-800 mb-4">分数段分布</h3>
@@ -551,10 +447,8 @@ const DashboardPrototype = () => {
           </>
         )}
 
-        {/* 持证阶段页面 */}
         {selectedTab === 'certificate' && (
           <>
-            {/* 筛选器 */}
             <FilterPanel filters={[
               { label: '发证时间', default: '2025-04-01至今' },
               { label: '认证名称', default: '全部' },
@@ -563,29 +457,12 @@ const DashboardPrototype = () => {
               { label: '用户来源三级', default: '全部' }
             ]} />
 
-            {/* 持证指标卡片 - 3个平分列宽 */}
             <div className="grid grid-cols-3 gap-6 mb-6">
-              <MetricCard 
-                title="持证人数" 
-                value="6,100" 
-                icon={Award}
-                subtitle="获得证书的总人数"
-              />
-              <MetricCard 
-                title="有效持证人数" 
-                value="5,985" 
-                subtitle="证书在有效期内的人数"
-              />
-              <MetricCard 
-                title="报名考证转化率" 
-                value="74.4%" 
-                change="+5.2%" 
-                trend="up"
-                subtitle="持证人数/报名人数"
-              />
+              <MetricCard title="持证人数" value="6,100" icon={Award} subtitle="获得证书的总人数" />
+              <MetricCard title="有效持证人数" value="5,985" subtitle="证书在有效期内的人数" />
+              <MetricCard title="报名考证转化率" value="74.4%" change="+5.2%" trend="up" subtitle="持证人数/报名人数" />
             </div>
 
-            {/* 图表区域 */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
               <div className="bg-white rounded-lg shadow p-6">
                 <h3 className="text-lg font-semibold text-gray-800 mb-4">发证趋势</h3>
@@ -615,7 +492,6 @@ const DashboardPrototype = () => {
               </div>
             </div>
 
-            {/* 持证用户来源分布 */}
             <div className="bg-white rounded-lg shadow p-6">
               <h3 className="text-lg font-semibold text-gray-800 mb-4">持证用户来源分布</h3>
               <ResponsiveContainer width="100%" height={320}>
