@@ -425,27 +425,6 @@ const DashboardPrototype = () => {
               <MetricCard title="人均学习时长" value="142分钟" subtitle="所有考生平均学习时长" />
             </div>
 
-            <div className="bg-white rounded-lg shadow p-6 mb-6">
-              <h3 className="text-lg font-semibold text-gray-800 mb-4">指标说明</h3>
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 text-sm">
-                <div className="border-l-4 border-blue-500 pl-4">
-                  <p className="font-semibold text-gray-700 mb-1">当前活跃学习人数</p>
-                  <p className="text-gray-600">最后学习时间不为空的用户总数</p>
-                </div>
-                <div className="border-l-4 border-green-500 pl-4">
-                  <p className="font-semibold text-gray-700 mb-1">学习完成人数</p>
-                  <p className="text-gray-600">不同认证已完成学习的用户总数</p>
-                </div>
-                <div className="border-l-4 border-purple-500 pl-4">
-                  <p className="font-semibold text-gray-700 mb-1">学习参与人数</p>
-                  <p className="text-gray-600">实际参加学习的用户总数</p>
-                </div>
-                <div className="border-l-4 border-orange-500 pl-4">
-                  <p className="font-semibold text-gray-700 mb-1">人均学习时长</p>
-                  <p className="text-gray-600">所有考生平均学习时长</p>
-                </div>
-              </div>
-            </div>
 
             <div className="grid grid-cols-1 gap-6">
               <div className="bg-white rounded-lg shadow p-6">
@@ -519,15 +498,6 @@ const DashboardPrototype = () => {
               <div className="bg-white rounded-lg shadow p-5 hover:shadow-lg transition-shadow h-full"></div>
             </div>
 
-            <div className="bg-white rounded-lg shadow p-6 mb-6">
-              <h3 className="text-lg font-semibold text-gray-800 mb-4">指标说明</h3>
-              <div className="grid grid-cols-1 gap-4 text-sm">
-                <div className="border-l-4 border-blue-500 pl-4">
-                  <p className="font-semibold text-gray-700 mb-1">总报名人数</p>
-                  <p className="text-gray-600">所选报名时间至今报名参加考试的用户总数</p>
-                </div>
-              </div>
-            </div>
 
             <div className="grid grid-cols-1 gap-6">
               <div className="bg-white rounded-lg shadow p-6">
@@ -577,27 +547,6 @@ const DashboardPrototype = () => {
               <MetricCard title="使用免费代金券考试通过率" value="85.2%" subtitle="使用代金券且考试通过的用户数/使用代金券且完成考试的用户总数" />
             </div>
 
-            <div className="bg-white rounded-lg shadow p-6 mb-6">
-              <h3 className="text-lg font-semibold text-gray-800 mb-4">指标说明</h3>
-              <div className="grid grid-cols-4 gap-4 text-sm">
-                <div className="border-l-4 border-blue-500 pl-4">
-                  <p className="font-semibold text-gray-700 mb-1">总参考人数</p>
-                  <p className="text-gray-600">实际参加考试的用户总数</p>
-                </div>
-                <div className="border-l-4 border-green-500 pl-4">
-                  <p className="font-semibold text-gray-700 mb-1">平均参考次数</p>
-                  <p className="text-gray-600">每个考生平均参考多少次</p>
-                </div>
-                <div className="border-l-4 border-purple-500 pl-4">
-                  <p className="font-semibold text-gray-700 mb-1">考试通过率</p>
-                  <p className="text-gray-600">通过考试的用户占比</p>
-                </div>
-                <div className="border-l-4 border-orange-500 pl-4">
-                  <p className="font-semibold text-gray-700 mb-1">使用免费代金券考试通过率</p>
-                  <p className="text-gray-600">使用代金券且通过的占比</p>
-                </div>
-              </div>
-            </div>
 
             <div className="grid grid-cols-1 gap-6">
               <div className="bg-white rounded-lg shadow p-6">
@@ -646,19 +595,6 @@ const DashboardPrototype = () => {
               <div className="bg-white rounded-lg shadow p-5 hover:shadow-lg transition-shadow h-full"></div>
             </div>
 
-            <div className="bg-white rounded-lg shadow p-6 mb-6">
-              <h3 className="text-lg font-semibold text-gray-800 mb-4">指标说明</h3>
-              <div className="grid grid-cols-2 gap-4 text-sm">
-                <div className="border-l-4 border-blue-500 pl-4">
-                  <p className="font-semibold text-gray-700 mb-1">持证人数</p>
-                  <p className="text-gray-600">获得证书的用户总数</p>
-                </div>
-                <div className="border-l-4 border-green-500 pl-4">
-                  <p className="font-semibold text-gray-700 mb-1">有效持证人数</p>
-                  <p className="text-gray-600">获得证书且证书在有效期内的用户总数</p>
-                </div>
-              </div>
-            </div>
 
             <div className="grid grid-cols-1 gap-6">
               <div className="bg-white rounded-lg shadow p-6">
