@@ -449,17 +449,20 @@ const DashboardPrototype = () => {
                 <h3 className="text-lg font-semibold text-gray-800 mb-4">学习进度分布</h3>
                 <ResponsiveContainer width="100%" height={300}>
                   <LineChart data={[
-                    { name: '0-25%', value: 17.6, count: 1850 },
-                    { name: '25-50%', value: 22.3, count: 2340 },
-                    { name: '50-75%', value: 28.4, count: 2980 },
-                    { name: '75-100%', value: 31.7, count: 3330 }
+                    { progress: '0-25%', '云计算架构师': 18.5, '数据分析师': 16.2, '网络安全专家': 17.8, 'AI工程师': 19.3 },
+                    { progress: '25-50%', '云计算架构师': 22.1, '数据分析师': 24.5, '网络安全专家': 21.6, 'AI工程师': 20.4 },
+                    { progress: '50-75%', '云计算架构师': 28.9, '数据分析师': 27.3, '网络安全专家': 29.1, 'AI工程师': 28.7 },
+                    { progress: '75-100%', '云计算架构师': 30.5, '数据分析师': 32.0, '网络安全专家': 31.5, 'AI工程师': 31.6 }
                   ]}>
                     <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="name" />
-                    <YAxis />
+                    <XAxis dataKey="progress" label={{ value: '学习进度', position: 'insideBottomRight', offset: -5 }} />
+                    <YAxis label={{ value: '占比(%)', angle: -90, position: 'insideLeft' }} />
                     <Tooltip />
                     <Legend />
-                    <Line type="monotone" dataKey="value" stroke="#10b981" strokeWidth={2} name="占比(%)" />
+                    <Line type="monotone" dataKey="云计算架构师" stroke="#3b82f6" strokeWidth={2} />
+                    <Line type="monotone" dataKey="数据分析师" stroke="#10b981" strokeWidth={2} />
+                    <Line type="monotone" dataKey="网络安全专家" stroke="#f59e0b" strokeWidth={2} />
+                    <Line type="monotone" dataKey="AI工程师" stroke="#8b5cf6" strokeWidth={2} />
                   </LineChart>
                 </ResponsiveContainer>
               </div>
