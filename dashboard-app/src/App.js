@@ -225,13 +225,6 @@ const DashboardPrototype = () => {
     { date: '11-28', count: 195 }
   ];
 
-  const progressData = [
-    { range: '0-25%', count: 1850 },
-    { range: '25-50%', count: 2340 },
-    { range: '50-75%', count: 2980 },
-    { range: '75-100%', count: 3330 }
-  ];
-
   const registrationTrendData = [
     { date: '11-22', count: 112 },
     { date: '11-23', count: 135 },
@@ -247,24 +240,6 @@ const DashboardPrototype = () => {
     { name: '数据分析师', count: 2180 },
     { name: '网络安全专家', count: 1820 },
     { name: 'AI工程师', count: 1750 }
-  ];
-
-  const scoreData = [
-    { range: '0-60', count: 580 },
-    { range: '60-70', count: 1240 },
-    { range: '70-80', count: 2150 },
-    { range: '80-90', count: 2380 },
-    { range: '90-100', count: 1030 }
-  ];
-
-  const examScoreTrendData = [
-    { date: '11-22', score: 77.5 },
-    { date: '11-23', score: 78.2 },
-    { date: '11-24', score: 79.1 },
-    { date: '11-25', score: 78.8 },
-    { date: '11-26', score: 79.5 },
-    { date: '11-27', score: 80.2 },
-    { date: '11-28', score: 79.3 }
   ];
 
   const certificateTrendData = [
