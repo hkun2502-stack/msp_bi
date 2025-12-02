@@ -59,54 +59,6 @@ const DashboardPrototype = () => {
     </div>
   );
 
-  const FunnelChart = () => {
-    const stages = [
-      { name: '总报名人数', value: 8200, percent: 100, rate: '-' },
-      { name: '总参考人数', value: 7380, percent: 90.0, rate: '90.0%' },
-      { name: '总持证人数', value: 6100, percent: 74.4, rate: '82.7%' }
-    ];
-
-    return (
-      <div className="bg-white rounded-lg shadow p-6">
-        <h3 className="text-lg font-semibold text-gray-800 mb-6">全流程转化漏斗</h3>
-        <div className="space-y-4">
-          {stages.map((stage, index) => (
-            <div key={index}>
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-sm font-medium text-gray-700">{stage.name}</span>
-                <div className="text-right">
-                  <span className="text-sm font-semibold text-gray-900">{stage.value.toLocaleString()} 人</span>
-                  <span className="text-xs text-gray-500 ml-2">({stage.percent}%)</span>
-                </div>
-              </div>
-              <div 
-                className="relative h-14 bg-gradient-to-r from-blue-600 to-blue-400 rounded-lg flex items-center justify-center text-white font-semibold shadow-sm"
-                style={{ width: `${Math.max(stage.percent, 20)}%`, minWidth: '150px' }}
-              >
-                <span className="text-lg">{stage.value.toLocaleString()}</span>
-              </div>
-              {index < stages.length - 1 && (
-                <div className="flex items-center justify-center my-2">
-                  <div className="text-sm">
-                    <span className="text-gray-400">↓ 转化率: </span>
-                    <span className="font-semibold text-blue-600">{stages[index + 1].rate}</span>
-                  </div>
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-        <div className="mt-6 pt-4 border-t border-gray-200">
-          <div className="text-sm text-gray-600">
-            <span className="font-medium">整体转化率：</span>
-            <span className="text-blue-600 font-semibold ml-2">74.4%</span>
-            <span className="text-gray-400 ml-2">(报名→持证)</span>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
   const LifecycleTable = () => {
     // 示例数据：生命周期全表
     const lifecycleTableData = [
@@ -258,12 +210,9 @@ const DashboardPrototype = () => {
   };
 
   const userSourceData = [
-    { name: '官网直接访问', value: 3200 },
-    { name: '微信公众号', value: 2800 },
-    { name: '企业培训', value: 1850 },
-    { name: '合作伙伴', value: 1420 },
-    { name: '线下活动', value: 980 },
-    { name: '搜索引擎', value: 750 }
+    { name: '内部员工', value: 3200 },
+    { name: '生态员工', value: 2800 },
+    { name: '外部客户', value: 4500 }
   ];
 
   const dailyLearningData = [
@@ -403,36 +352,15 @@ const DashboardPrototype = () => {
                 <div className="space-y-4">
                   <div>
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm font-medium text-gray-700">总学习人数</span>
+                      <span className="text-sm font-medium text-gray-700">总报名人数</span>
                       <div className="text-right">
-                        <span className="text-sm font-semibold text-gray-900">10,500 人</span>
+                        <span className="text-sm font-semibold text-gray-900">8,200 人</span>
                         <span className="text-xs text-gray-500 ml-2">(100%)</span>
                       </div>
                     </div>
                     <div 
                       className="relative h-12 bg-gradient-to-r from-blue-600 to-blue-400 rounded-lg flex items-center justify-center text-white font-semibold shadow-sm"
                       style={{ width: '100%' }}
-                    >
-                      <span>10,500</span>
-                    </div>
-                  </div>
-                  <div className="flex items-center justify-center">
-                    <div className="text-sm">
-                      <span className="text-gray-400">↓ 转化率: </span>
-                      <span className="font-semibold text-blue-600">78.1%</span>
-                    </div>
-                  </div>
-                  <div>
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm font-medium text-gray-700">总报名人数</span>
-                      <div className="text-right">
-                        <span className="text-sm font-semibold text-gray-900">8,200 人</span>
-                        <span className="text-xs text-gray-500 ml-2">(78.1%)</span>
-                      </div>
-                    </div>
-                    <div 
-                      className="relative h-12 bg-gradient-to-r from-blue-600 to-blue-400 rounded-lg flex items-center justify-center text-white font-semibold shadow-sm"
-                      style={{ width: '78.1%', minWidth: '100px' }}
                     >
                       <span>8,200</span>
                     </div>
@@ -448,12 +376,12 @@ const DashboardPrototype = () => {
                       <span className="text-sm font-medium text-gray-700">总参考人数</span>
                       <div className="text-right">
                         <span className="text-sm font-semibold text-gray-900">7,380 人</span>
-                        <span className="text-xs text-gray-500 ml-2">(70.3%)</span>
+                        <span className="text-xs text-gray-500 ml-2">(90.0%)</span>
                       </div>
                     </div>
                     <div 
                       className="relative h-12 bg-gradient-to-r from-blue-600 to-blue-400 rounded-lg flex items-center justify-center text-white font-semibold shadow-sm"
-                      style={{ width: '70.3%', minWidth: '100px' }}
+                      style={{ width: '90%', minWidth: '100px' }}
                     >
                       <span>7,380</span>
                     </div>
@@ -469,12 +397,12 @@ const DashboardPrototype = () => {
                       <span className="text-sm font-medium text-gray-700">总持证人数</span>
                       <div className="text-right">
                         <span className="text-sm font-semibold text-gray-900">6,100 人</span>
-                        <span className="text-xs text-gray-500 ml-2">(58.1%)</span>
+                        <span className="text-xs text-gray-500 ml-2">(74.4%)</span>
                       </div>
                     </div>
                     <div 
                       className="relative h-12 bg-gradient-to-r from-blue-600 to-blue-400 rounded-lg flex items-center justify-center text-white font-semibold shadow-sm"
-                      style={{ width: '58.1%', minWidth: '100px' }}
+                      style={{ width: '74.4%', minWidth: '100px' }}
                     >
                       <span>6,100</span>
                     </div>
@@ -483,8 +411,8 @@ const DashboardPrototype = () => {
                 <div className="mt-6 pt-4 border-t border-gray-200">
                   <div className="text-sm text-gray-600">
                     <span className="font-medium">整体转化率：</span>
-                    <span className="text-blue-600 font-semibold ml-2">58.1%</span>
-                    <span className="text-gray-400 ml-2">(学习→持证)</span>
+                    <span className="text-blue-600 font-semibold ml-2">74.4%</span>
+                    <span className="text-gray-400 ml-2">(报名→持证)</span>
                   </div>
                 </div>
               </div>
@@ -516,16 +444,75 @@ const DashboardPrototype = () => {
             ]} />
 
             <div className="grid grid-cols-4 gap-6 mb-6">
-              <MetricCard title="总学习人数" value="10,500" icon={BookOpen} subtitle="开始学习的考生总数" />
-              <MetricCard title="当前活跃学习人数" value="3,420" change="+15.3%" trend="up" subtitle="本周期内有学习行为" />
-              <MetricCard title="人均学习时长" value="142分钟" subtitle="所有考生平均" />
-              <MetricCard title="学习完成率" value="72.5%" change="+3.8%" trend="up" subtitle="完成全部课时的占比" />
+              <MetricCard title="当前活跃学习人数" value="3,420" change="+15.3%" trend="up" subtitle="最后学习时间不为空的用户总数" />
+              <MetricCard title="学习完成人数" value="7,560" subtitle="不同认证已完成学习的用户总数" />
+              <MetricCard title="学习参与人数" value="10,500" subtitle="实际参加学习的用户总数" />
+              <MetricCard title="人均学习时长" value="142分钟" subtitle="所有考生平均学习时长" />
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="bg-white rounded-lg shadow p-6 mb-6">
+              <h3 className="text-lg font-semibold text-gray-800 mb-4">指标说明</h3>
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 text-sm">
+                <div className="border-l-4 border-blue-500 pl-4">
+                  <p className="font-semibold text-gray-700 mb-1">当前活跃学习人数</p>
+                  <p className="text-gray-600">最后学习时间不为空的用户总数</p>
+                </div>
+                <div className="border-l-4 border-green-500 pl-4">
+                  <p className="font-semibold text-gray-700 mb-1">学习完成人数</p>
+                  <p className="text-gray-600">不同认证已完成学习的用户总数</p>
+                </div>
+                <div className="border-l-4 border-purple-500 pl-4">
+                  <p className="font-semibold text-gray-700 mb-1">学习参与人数</p>
+                  <p className="text-gray-600">实际参加学习的用户总数</p>
+                </div>
+                <div className="border-l-4 border-orange-500 pl-4">
+                  <p className="font-semibold text-gray-700 mb-1">人均学习时长</p>
+                  <p className="text-gray-600">所有考生平均学习时长</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 gap-6">
+              <div className="bg-white rounded-lg shadow p-6">
+                <h3 className="text-lg font-semibold text-gray-800 mb-4">学习完成率分布</h3>
+                <ResponsiveContainer width="100%" height={300}>
+                  <BarChart data={[
+                    { range: '0-25%', count: 1850, percent: '17.6%' },
+                    { range: '25-50%', count: 2340, percent: '22.3%' },
+                    { range: '50-75%', count: 2980, percent: '28.4%' },
+                    { range: '75-100%', count: 3330, percent: '31.7%' }
+                  ]}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="range" />
+                    <YAxis />
+                    <Tooltip />
+                    <Bar dataKey="count" fill="#3b82f6" name="人数" />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+
+              <div className="bg-white rounded-lg shadow p-6">
+                <h3 className="text-lg font-semibold text-gray-800 mb-4">学习进度分布</h3>
+                <ResponsiveContainer width="100%" height={300}>
+                  <LineChart data={[
+                    { name: '0-25%', value: 17.6, count: 1850 },
+                    { name: '25-50%', value: 22.3, count: 2340 },
+                    { name: '50-75%', value: 28.4, count: 2980 },
+                    { name: '75-100%', value: 31.7, count: 3330 }
+                  ]}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="name" />
+                    <YAxis />
+                    <Tooltip />
+                    <Legend />
+                    <Line type="monotone" dataKey="value" stroke="#10b981" strokeWidth={2} name="占比(%)" />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
+
               <div className="bg-white rounded-lg shadow p-6">
                 <h3 className="text-lg font-semibold text-gray-800 mb-4">日均新增学习人数</h3>
-                <ResponsiveContainer width="100%" height={280}>
+                <ResponsiveContainer width="100%" height={300}>
                   <LineChart data={dailyLearningData}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="date" />
@@ -534,19 +521,6 @@ const DashboardPrototype = () => {
                     <Legend />
                     <Line type="monotone" dataKey="count" stroke="#3b82f6" strokeWidth={2} name="新增人数" />
                   </LineChart>
-                </ResponsiveContainer>
-              </div>
-
-              <div className="bg-white rounded-lg shadow p-6">
-                <h3 className="text-lg font-semibold text-gray-800 mb-4">学习进度分布</h3>
-                <ResponsiveContainer width="100%" height={280}>
-                  <BarChart data={progressData}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="range" />
-                    <YAxis />
-                    <Tooltip />
-                    <Bar dataKey="count" fill="#10b981" name="人数" />
-                  </BarChart>
                 </ResponsiveContainer>
               </div>
             </div>
@@ -563,16 +537,27 @@ const DashboardPrototype = () => {
               { label: '用户来源三级', default: '全部' }
             ]} />
 
-            <div className="grid grid-cols-3 gap-6 mb-6">
-              <MetricCard title="总报名人数" value="8,200" icon={FileCheck} subtitle="报名参加考试的总人数" />
-              <MetricCard title="学习转报名率" value="78.1%" change="+2.3%" trend="up" subtitle="学习后报名的转化率" />
-              <MetricCard title="本周新增报名" value="884" change="+8.5%" trend="up" subtitle="本周新增报名人数" />
+            <div className="grid grid-cols-4 gap-6 mb-6">
+              <MetricCard title="总报名人数" value="8,200" subtitle="所选报名时间至今报名参加考试的用户总数" />
+              <div className="bg-white rounded-lg shadow p-5 hover:shadow-lg transition-shadow h-full"></div>
+              <div className="bg-white rounded-lg shadow p-5 hover:shadow-lg transition-shadow h-full"></div>
+              <div className="bg-white rounded-lg shadow p-5 hover:shadow-lg transition-shadow h-full"></div>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="bg-white rounded-lg shadow p-6 mb-6">
+              <h3 className="text-lg font-semibold text-gray-800 mb-4">指标说明</h3>
+              <div className="grid grid-cols-1 gap-4 text-sm">
+                <div className="border-l-4 border-blue-500 pl-4">
+                  <p className="font-semibold text-gray-700 mb-1">总报名人数</p>
+                  <p className="text-gray-600">所选报名时间至今报名参加考试的用户总数</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 gap-6">
               <div className="bg-white rounded-lg shadow p-6">
                 <h3 className="text-lg font-semibold text-gray-800 mb-4">报名趋势</h3>
-                <ResponsiveContainer width="100%" height={280}>
+                <ResponsiveContainer width="100%" height={300}>
                   <LineChart data={registrationTrendData}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="date" />
@@ -586,7 +571,7 @@ const DashboardPrototype = () => {
 
               <div className="bg-white rounded-lg shadow p-6">
                 <h3 className="text-lg font-semibold text-gray-800 mb-4">认证报名分布</h3>
-                <ResponsiveContainer width="100%" height={280}>
+                <ResponsiveContainer width="100%" height={300}>
                   <BarChart data={certificationData}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="name" />
@@ -611,81 +596,58 @@ const DashboardPrototype = () => {
             ]} />
 
             <div className="grid grid-cols-4 gap-6 mb-6">
-              <MetricCard title="总参考人数" value="7,380" icon={Users} subtitle="实际参加考试的总人数" />
-              <MetricCard title="考试通过率" value="82.7%" change="+2.4%" trend="up" subtitle="考试合格人数占比" />
-              <MetricCard title="平均分数" value="79.3分" subtitle="所有考生平均考试分数" />
-              <MetricCard title="代金券发放总数" value="2,850" subtitle="已发放的代金券数量" />
+              <MetricCard title="总参考人数" value="7,380" subtitle="实际参加考试的用户总数" />
+              <MetricCard title="平均参考次数" value="1.2次" subtitle="每个考生平均参考多少次" />
+              <MetricCard title="考试通过率" value="82.7%" subtitle="通过考试的用户占参加考试的用户总数的百分比" />
+              <MetricCard title="使用免费代金券考试通过率" value="85.2%" subtitle="使用代金券且考试通过的用户数/使用代金券且完成考试的用户总数" />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-              <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg shadow p-6 border-2 border-green-200">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-lg font-semibold text-gray-800">代金券考试通过率</h3>
-                  <div className="bg-green-100 p-2 rounded-lg">
-                    <Award className="w-5 h-5 text-green-600" />
-                  </div>
+            <div className="bg-white rounded-lg shadow p-6 mb-6">
+              <h3 className="text-lg font-semibold text-gray-800 mb-4">指标说明</h3>
+              <div className="grid grid-cols-4 gap-4 text-sm">
+                <div className="border-l-4 border-blue-500 pl-4">
+                  <p className="font-semibold text-gray-700 mb-1">总参考人数</p>
+                  <p className="text-gray-600">实际参加考试的用户总数</p>
                 </div>
-                <div className="flex items-end gap-4">
-                  <div className="text-4xl font-bold text-green-600">85.2%</div>
-                  <div className="flex items-center mb-2">
-                    <TrendingUp className="w-5 h-5 text-green-500 mr-1" />
-                    <span className="text-green-600 font-medium">+3.1%</span>
-                    <span className="text-gray-500 text-sm ml-1">环比</span>
-                  </div>
+                <div className="border-l-4 border-green-500 pl-4">
+                  <p className="font-semibold text-gray-700 mb-1">平均参考次数</p>
+                  <p className="text-gray-600">每个考生平均参考多少次</p>
                 </div>
-                <p className="text-sm text-gray-600 mt-3">
-                  使用代金券且考试通过人数 / 使用代金券且完成考试人数
-                </p>
-              </div>
-
-              <div className="bg-white rounded-lg shadow p-6">
-                <h3 className="text-lg font-semibold text-gray-800 mb-4">代金券使用统计</h3>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-blue-50 p-4 rounded-lg">
-                    <p className="text-sm text-gray-600 mb-1">发放总数</p>
-                    <p className="text-2xl font-bold text-blue-600">2,850</p>
-                  </div>
-                  <div className="bg-green-50 p-4 rounded-lg">
-                    <p className="text-sm text-gray-600 mb-1">使用人数</p>
-                    <p className="text-2xl font-bold text-green-600">2,430</p>
-                  </div>
-                  <div className="bg-purple-50 p-4 rounded-lg">
-                    <p className="text-sm text-gray-600 mb-1">使用率</p>
-                    <p className="text-2xl font-bold text-purple-600">85.3%</p>
-                  </div>
-                  <div className="bg-orange-50 p-4 rounded-lg">
-                    <p className="text-sm text-gray-600 mb-1">通过人数</p>
-                    <p className="text-2xl font-bold text-orange-600">2,070</p>
-                  </div>
+                <div className="border-l-4 border-purple-500 pl-4">
+                  <p className="font-semibold text-gray-700 mb-1">考试通过率</p>
+                  <p className="text-gray-600">通过考试的用户占比</p>
+                </div>
+                <div className="border-l-4 border-orange-500 pl-4">
+                  <p className="font-semibold text-gray-700 mb-1">使用免费代金券考试通过率</p>
+                  <p className="text-gray-600">使用代金券且通过的占比</p>
                 </div>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 gap-6">
               <div className="bg-white rounded-lg shadow p-6">
-                <h3 className="text-lg font-semibold text-gray-800 mb-4">分数段分布</h3>
-                <ResponsiveContainer width="100%" height={280}>
-                  <BarChart data={scoreData}>
+                <h3 className="text-lg font-semibold text-gray-800 mb-4">考试通过率分布-认证</h3>
+                <ResponsiveContainer width="100%" height={300}>
+                  <BarChart data={certificationData}>
                     <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="range" />
+                    <XAxis dataKey="name" />
                     <YAxis />
                     <Tooltip />
-                    <Bar dataKey="count" fill="#ef4444" name="人数" />
+                    <Bar dataKey="count" fill="#3b82f6" name="通过人数" />
                   </BarChart>
                 </ResponsiveContainer>
               </div>
 
               <div className="bg-white rounded-lg shadow p-6">
-                <h3 className="text-lg font-semibold text-gray-800 mb-4">考试成绩趋势</h3>
-                <ResponsiveContainer width="100%" height={280}>
-                  <LineChart data={examScoreTrendData}>
+                <h3 className="text-lg font-semibold text-gray-800 mb-4">考试通过率分布-用户来源</h3>
+                <ResponsiveContainer width="100%" height={300}>
+                  <BarChart data={userSourceData}>
                     <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="date" />
-                    <YAxis domain={[70, 85]} />
+                    <XAxis dataKey="name" />
+                    <YAxis />
                     <Tooltip />
-                    <Legend />
-                    <Line type="monotone" dataKey="score" stroke="#06b6d4" strokeWidth={2} name="平均分" />
-                  </LineChart>
+                    <Bar dataKey="value" fill="#10b981" name="通过人数" />
+                  </BarChart>
                 </ResponsiveContainer>
               </div>
             </div>
@@ -702,16 +664,31 @@ const DashboardPrototype = () => {
               { label: '用户来源三级', default: '全部' }
             ]} />
 
-            <div className="grid grid-cols-3 gap-6 mb-6">
-              <MetricCard title="持证人数" value="6,100" icon={Award} subtitle="获得证书的总人数" />
-              <MetricCard title="有效持证人数" value="5,985" subtitle="证书在有效期内的人数" />
-              <MetricCard title="报名考证转化率" value="74.4%" change="+5.2%" trend="up" subtitle="持证人数/报名人数" />
+            <div className="grid grid-cols-4 gap-6 mb-6">
+              <MetricCard title="持证人数" value="6,100" subtitle="获得证书的用户总数" />
+              <MetricCard title="有效持证人数" value="5,985" subtitle="获得证书且证书在有效期内的用户总数" />
+              <div className="bg-white rounded-lg shadow p-5 hover:shadow-lg transition-shadow h-full"></div>
+              <div className="bg-white rounded-lg shadow p-5 hover:shadow-lg transition-shadow h-full"></div>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+            <div className="bg-white rounded-lg shadow p-6 mb-6">
+              <h3 className="text-lg font-semibold text-gray-800 mb-4">指标说明</h3>
+              <div className="grid grid-cols-2 gap-4 text-sm">
+                <div className="border-l-4 border-blue-500 pl-4">
+                  <p className="font-semibold text-gray-700 mb-1">持证人数</p>
+                  <p className="text-gray-600">获得证书的用户总数</p>
+                </div>
+                <div className="border-l-4 border-green-500 pl-4">
+                  <p className="font-semibold text-gray-700 mb-1">有效持证人数</p>
+                  <p className="text-gray-600">获得证书且证书在有效期内的用户总数</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 gap-6">
               <div className="bg-white rounded-lg shadow p-6">
                 <h3 className="text-lg font-semibold text-gray-800 mb-4">发证趋势</h3>
-                <ResponsiveContainer width="100%" height={280}>
+                <ResponsiveContainer width="100%" height={300}>
                   <LineChart data={certificateTrendData}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="date" />
@@ -725,7 +702,7 @@ const DashboardPrototype = () => {
 
               <div className="bg-white rounded-lg shadow p-6">
                 <h3 className="text-lg font-semibold text-gray-800 mb-4">证书科目分布</h3>
-                <ResponsiveContainer width="100%" height={280}>
+                <ResponsiveContainer width="100%" height={300}>
                   <BarChart data={certSubjectData}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="name" />
@@ -735,19 +712,19 @@ const DashboardPrototype = () => {
                   </BarChart>
                 </ResponsiveContainer>
               </div>
-            </div>
 
-            <div className="bg-white rounded-lg shadow p-6">
-              <h3 className="text-lg font-semibold text-gray-800 mb-4">持证用户来源分布</h3>
-              <ResponsiveContainer width="100%" height={320}>
-                <BarChart data={certUserSourceData}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="name" />
-                  <YAxis />
-                  <Tooltip />
-                  <Bar dataKey="value" fill="#f97316" name="持证人数" />
-                </BarChart>
-              </ResponsiveContainer>
+              <div className="bg-white rounded-lg shadow p-6">
+                <h3 className="text-lg font-semibold text-gray-800 mb-4">持证用户来源分布</h3>
+                <ResponsiveContainer width="100%" height={300}>
+                  <BarChart data={certUserSourceData}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="name" />
+                    <YAxis />
+                    <Tooltip />
+                    <Bar dataKey="value" fill="#f97316" name="持证人数" />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
             </div>
           </>
         )}
