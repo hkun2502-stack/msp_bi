@@ -60,20 +60,26 @@ const DashboardPrototype = () => {
   );
 
   const LifecycleTable = () => {
-    // 示例数据：生命周期全表
+    // 示例数据：生命周期全表（字段按要求）
     const lifecycleTableData = [
-      { id: 1, userId: 'U001', userName: '张三', source: '官网直接访问', learnStatus: '已完成', learnTime: '145分钟', registerStatus: '已报名', registerDate: '2025-04-05', examStatus: '已参考', examScore: '85分', certStatus: '已持证', certDate: '2025-04-15' },
-      { id: 2, userId: 'U002', userName: '李四', source: '微信公众号', learnStatus: '进行中', learnTime: '89分钟', registerStatus: '已报名', registerDate: '2025-04-08', examStatus: '已参考', examScore: '92分', certStatus: '已持证', certDate: '2025-04-18' },
-      { id: 3, userId: 'U003', userName: '王五', source: '企业培训', learnStatus: '已完成', learnTime: '156分钟', registerStatus: '已报名', registerDate: '2025-04-10', examStatus: '已参考', examScore: '78分', certStatus: '已持证', certDate: '2025-04-20' },
-      { id: 4, userId: 'U004', userName: '赵六', source: '合作伙伴', learnStatus: '已完成', learnTime: '132分钟', registerStatus: '未报名', registerDate: '-', examStatus: '未参考', examScore: '-', certStatus: '未持证', certDate: '-' },
-      { id: 5, userId: 'U005', userName: '周七', source: '线下活动', learnStatus: '已完成', learnTime: '168分钟', registerStatus: '已报名', registerDate: '2025-04-12', examStatus: '已参考', examScore: '88分', certStatus: '已持证', certDate: '2025-04-22' },
-      { id: 6, userId: 'U006', userName: '吴八', source: '搜索引擎', learnStatus: '进行中', learnTime: '95分钟', registerStatus: '已报名', registerDate: '2025-04-14', examStatus: '未参考', examScore: '-', certStatus: '未持证', certDate: '-' },
-      { id: 7, userId: 'U007', userName: '郑九', source: '官网直接访问', learnStatus: '已完成', learnTime: '142分钟', registerStatus: '已报名', registerDate: '2025-04-16', examStatus: '已参考', examScore: '91分', certStatus: '已持证', certDate: '2025-04-25' },
-      { id: 8, userId: 'U008', userName: '孙十', source: '微信公众号', learnStatus: '已完成', learnTime: '150分钟', registerStatus: '已报名', registerDate: '2025-04-18', examStatus: '已参考', examScore: '84分', certStatus: '已持证', certDate: '2025-04-28' },
-      { id: 9, userId: 'U009', userName: '何十一', source: '企业培训', learnStatus: '进行中', learnTime: '76分钟', registerStatus: '已报名', registerDate: '2025-04-20', examStatus: '未参考', examScore: '-', certStatus: '未持证', certDate: '-' },
-      { id: 10, userId: 'U010', userName: '林十二', source: '合作伙伴', learnStatus: '已完成', learnTime: '138分钟', registerStatus: '已报名', registerDate: '2025-04-22', examStatus: '已参考', examScore: '86分', certStatus: '已持证', certDate: '2025-05-02' },
-      { id: 11, userId: 'U011', userName: '高十三', source: '线下活动', learnStatus: '已完成', learnTime: '154分钟', registerStatus: '未报名', registerDate: '-', examStatus: '未参考', examScore: '-', certStatus: '未持证', certDate: '-' },
-      { id: 12, userId: 'U012', userName: '宋十四', source: '搜索引擎', learnStatus: '已完成', learnTime: '148分钟', registerStatus: '已报名', registerDate: '2025-04-24', examStatus: '已参考', examScore: '79分', certStatus: '已持证', certDate: '2025-05-05' },
+      {
+        id: 1,
+        uin: 'U001', certName: '云计算架构师', startTime: '2025-04-01', lastLearnTime: '2025-11-28 10:12',
+        videoDurationMin: 120, totalLearnMinutes: 145, totalLessons: 20, learnedLessons: 18, isCompleted: '是',
+        examUin: 'EXU001', userSource: '官网直接访问', name: '张三', weworkId: 'gw123', examType: '线上', examLang: '中文', examDuration: 120, ExamCode: 'EC123',
+        registerTime: '2025-04-05', examTime: '2025-05-01 09:00', venueName: '北京考点A', examMethod: '闭卷', examCode: 'E1234', qualificationCode: 'Q001',
+        examStatus: '考试通过', score: 85, activityId: 'A001', importReason: '导入', notes: '', systemId: 'SYS001', settlementPath: '在线', purchaseMethod: '直接购买',
+        userSource1: '官网', userSource2: 'campaign', userSource3: '渠道A', usedFreeVoucher: '否', certStatus: '已持证', certNumber: 'C-20250415-001', certExpiry: '2027-04-15', certGrantTime: '2025-04-15'
+      },
+      {
+        id: 2,
+        uin: 'U002', certName: '数据分析师', startTime: '2025-04-03', lastLearnTime: '2025-10-20 09:00',
+        videoDurationMin: 95, totalLearnMinutes: 89, totalLessons: 18, learnedLessons: 16, isCompleted: '否',
+        examUin: 'EXU002', userSource: '微信公众号', name: '李四', weworkId: 'gw456', examType: '线下', examLang: '中文', examDuration: 150, ExamCode: 'EC456',
+        registerTime: '2025-04-08', examTime: '2025-06-12 13:30', venueName: '上海考点B', examMethod: '机考', examCode: 'E5678', qualificationCode: 'Q002',
+        examStatus: '未参考', score: '-', activityId: 'A002', importReason: '手工', notes: '备注示例', systemId: 'SYS002', settlementPath: '线下结算', purchaseMethod: '团购',
+        userSource1: '公众号', userSource2: '推文', userSource3: '活动', usedFreeVoucher: '是', certStatus: '未持证', certNumber: '', certExpiry: '', certGrantTime: ''
+      }
     ];
 
     const totalPages = Math.ceil(lifecycleTableData.length / itemsPerPage);
@@ -82,11 +88,12 @@ const DashboardPrototype = () => {
 
     const handleDownload = () => {
       const csv = [
-        ['用户ID', '用户名', '来源', '学习状态', '学习时长', '报名状态', '报名日期', '考试状态', '考试成绩', '持证状态', '发证日期'],
+        ['用户UIN','认证名称','开始时间','最后学习时间','视频时长(分钟)','总学习时长(分钟)','总课时','已学课时','是否完成学习','考试UIN','用户来源','Name','企微id','考试类型','考试语言','考试时长','ExamCode','报名时间','考试时间','考场名称','考试方式','考试码','资格码','考试状态','分数','所属活动ID','导入原因','备注','系统编号','结算路径','购买方式','用户来源一级','用户来源二级','用户来源三级','是否使用免费代金券','证书状态','证书编号','证书失效时间','证书授予时间'],
         ...lifecycleTableData.map(item => [
-          item.userId, item.userName, item.source, item.learnStatus, item.learnTime, 
-          item.registerStatus, item.registerDate, item.examStatus, item.examScore, 
-          item.certStatus, item.certDate
+          item.uin, item.certName, item.startTime, item.lastLearnTime, item.videoDurationMin, item.totalLearnMinutes, item.totalLessons, item.learnedLessons, item.isCompleted,
+          item.examUin, item.userSource, item.name, item.weworkId, item.examType, item.examLang, item.examDuration, item.ExamCode, item.registerTime, item.examTime, item.venueName,
+          item.examMethod, item.examCode, item.qualificationCode, item.examStatus, item.score, item.activityId, item.importReason, item.notes, item.systemId, item.settlementPath,
+          item.purchaseMethod, item.userSource1, item.userSource2, item.userSource3, item.usedFreeVoucher, item.certStatus, item.certNumber, item.certExpiry, item.certGrantTime
         ])
       ].map(row => row.join(',')).join('\n');
       
@@ -114,57 +121,89 @@ const DashboardPrototype = () => {
           <table className="w-full text-sm">
             <thead className="bg-gray-50 border-b-2 border-gray-200">
               <tr>
-                <th className="px-4 py-3 text-left font-semibold text-gray-700">用户ID</th>
-                <th className="px-4 py-3 text-left font-semibold text-gray-700">用户名</th>
-                <th className="px-4 py-3 text-left font-semibold text-gray-700">来源</th>
-                <th className="px-4 py-3 text-left font-semibold text-gray-700">学习状态</th>
-                <th className="px-4 py-3 text-left font-semibold text-gray-700">学习时长</th>
-                <th className="px-4 py-3 text-left font-semibold text-gray-700">报名状态</th>
-                <th className="px-4 py-3 text-left font-semibold text-gray-700">报名日期</th>
+                <th className="px-4 py-3 text-left font-semibold text-gray-700">用户UIN</th>
+                <th className="px-4 py-3 text-left font-semibold text-gray-700">认证名称</th>
+                <th className="px-4 py-3 text-left font-semibold text-gray-700">开始时间</th>
+                <th className="px-4 py-3 text-left font-semibold text-gray-700">最后学习时间</th>
+                <th className="px-4 py-3 text-left font-semibold text-gray-700">视频时长(分钟)</th>
+                <th className="px-4 py-3 text-left font-semibold text-gray-700">总学习时长(分钟)</th>
+                <th className="px-4 py-3 text-left font-semibold text-gray-700">总课时</th>
+                <th className="px-4 py-3 text-left font-semibold text-gray-700">已学课时</th>
+                <th className="px-4 py-3 text-left font-semibold text-gray-700">是否完成学习</th>
+                <th className="px-4 py-3 text-left font-semibold text-gray-700">考试UIN</th>
+                <th className="px-4 py-3 text-left font-semibold text-gray-700">用户来源</th>
+                <th className="px-4 py-3 text-left font-semibold text-gray-700">Name</th>
+                <th className="px-4 py-3 text-left font-semibold text-gray-700">企微id</th>
+                <th className="px-4 py-3 text-left font-semibold text-gray-700">考试类型</th>
+                <th className="px-4 py-3 text-left font-semibold text-gray-700">考试语言</th>
+                <th className="px-4 py-3 text-left font-semibold text-gray-700">考试时长</th>
+                <th className="px-4 py-3 text-left font-semibold text-gray-700">ExamCode</th>
+                <th className="px-4 py-3 text-left font-semibold text-gray-700">报名时间</th>
+                <th className="px-4 py-3 text-left font-semibold text-gray-700">考试时间</th>
+                <th className="px-4 py-3 text-left font-semibold text-gray-700">考场名称</th>
+                <th className="px-4 py-3 text-left font-semibold text-gray-700">考试方式</th>
+                <th className="px-4 py-3 text-left font-semibold text-gray-700">考试码</th>
+                <th className="px-4 py-3 text-left font-semibold text-gray-700">资格码</th>
                 <th className="px-4 py-3 text-left font-semibold text-gray-700">考试状态</th>
-                <th className="px-4 py-3 text-left font-semibold text-gray-700">考试成绩</th>
-                <th className="px-4 py-3 text-left font-semibold text-gray-700">持证状态</th>
-                <th className="px-4 py-3 text-left font-semibold text-gray-700">发证日期</th>
+                <th className="px-4 py-3 text-left font-semibold text-gray-700">分数</th>
+                <th className="px-4 py-3 text-left font-semibold text-gray-700">所属活动ID</th>
+                <th className="px-4 py-3 text-left font-semibold text-gray-700">导入原因</th>
+                <th className="px-4 py-3 text-left font-semibold text-gray-700">备注</th>
+                <th className="px-4 py-3 text-left font-semibold text-gray-700">系统编号</th>
+                <th className="px-4 py-3 text-left font-semibold text-gray-700">结算路径</th>
+                <th className="px-4 py-3 text-left font-semibold text-gray-700">购买方式</th>
+                <th className="px-4 py-3 text-left font-semibold text-gray-700">用户来源一级</th>
+                <th className="px-4 py-3 text-left font-semibold text-gray-700">用户来源二级</th>
+                <th className="px-4 py-3 text-left font-semibold text-gray-700">用户来源三级</th>
+                <th className="px-4 py-3 text-left font-semibold text-gray-700">是否使用免费代金券</th>
+                <th className="px-4 py-3 text-left font-semibold text-gray-700">证书状态</th>
+                <th className="px-4 py-3 text-left font-semibold text-gray-700">证书编号</th>
+                <th className="px-4 py-3 text-left font-semibold text-gray-700">证书失效时间</th>
+                <th className="px-4 py-3 text-left font-semibold text-gray-700">证书授予时间</th>
               </tr>
             </thead>
             <tbody>
               {paginatedData.map((item, index) => (
                 <tr key={item.id} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-                  <td className="px-4 py-3 text-gray-900">{item.userId}</td>
-                  <td className="px-4 py-3 text-gray-900">{item.userName}</td>
-                  <td className="px-4 py-3 text-gray-600">{item.source}</td>
-                  <td className="px-4 py-3">
-                    <span className={`px-2 py-1 rounded text-xs font-medium ${
-                      item.learnStatus === '已完成' ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'
-                    }`}>
-                      {item.learnStatus}
-                    </span>
-                  </td>
-                  <td className="px-4 py-3 text-gray-600">{item.learnTime}</td>
-                  <td className="px-4 py-3">
-                    <span className={`px-2 py-1 rounded text-xs font-medium ${
-                      item.registerStatus === '已报名' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
-                    }`}>
-                      {item.registerStatus}
-                    </span>
-                  </td>
-                  <td className="px-4 py-3 text-gray-600">{item.registerDate}</td>
-                  <td className="px-4 py-3">
-                    <span className={`px-2 py-1 rounded text-xs font-medium ${
-                      item.examStatus === '已参考' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
-                    }`}>
-                      {item.examStatus}
-                    </span>
-                  </td>
-                  <td className="px-4 py-3 text-gray-600">{item.examScore}</td>
-                  <td className="px-4 py-3">
-                    <span className={`px-2 py-1 rounded text-xs font-medium ${
-                      item.certStatus === '已持证' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
-                    }`}>
-                      {item.certStatus}
-                    </span>
-                  </td>
-                  <td className="px-4 py-3 text-gray-600">{item.certDate}</td>
+                  <td className="px-4 py-3 text-gray-900">{item.uin}</td>
+                  <td className="px-4 py-3 text-gray-900">{item.certName}</td>
+                  <td className="px-4 py-3 text-gray-600">{item.startTime}</td>
+                  <td className="px-4 py-3 text-gray-600">{item.lastLearnTime}</td>
+                  <td className="px-4 py-3 text-gray-600">{item.videoDurationMin}</td>
+                  <td className="px-4 py-3 text-gray-600">{item.totalLearnMinutes}</td>
+                  <td className="px-4 py-3 text-gray-600">{item.totalLessons}</td>
+                  <td className="px-4 py-3 text-gray-600">{item.learnedLessons}</td>
+                  <td className="px-4 py-3 text-gray-600">{item.isCompleted}</td>
+                  <td className="px-4 py-3 text-gray-600">{item.examUin}</td>
+                  <td className="px-4 py-3 text-gray-600">{item.userSource}</td>
+                  <td className="px-4 py-3 text-gray-600">{item.name}</td>
+                  <td className="px-4 py-3 text-gray-600">{item.weworkId}</td>
+                  <td className="px-4 py-3 text-gray-600">{item.examType}</td>
+                  <td className="px-4 py-3 text-gray-600">{item.examLang}</td>
+                  <td className="px-4 py-3 text-gray-600">{item.examDuration}</td>
+                  <td className="px-4 py-3 text-gray-600">{item.ExamCode}</td>
+                  <td className="px-4 py-3 text-gray-600">{item.registerTime}</td>
+                  <td className="px-4 py-3 text-gray-600">{item.examTime}</td>
+                  <td className="px-4 py-3 text-gray-600">{item.venueName}</td>
+                  <td className="px-4 py-3 text-gray-600">{item.examMethod}</td>
+                  <td className="px-4 py-3 text-gray-600">{item.examCode}</td>
+                  <td className="px-4 py-3 text-gray-600">{item.qualificationCode}</td>
+                  <td className="px-4 py-3 text-gray-600">{item.examStatus}</td>
+                  <td className="px-4 py-3 text-gray-600">{item.score}</td>
+                  <td className="px-4 py-3 text-gray-600">{item.activityId}</td>
+                  <td className="px-4 py-3 text-gray-600">{item.importReason}</td>
+                  <td className="px-4 py-3 text-gray-600">{item.notes}</td>
+                  <td className="px-4 py-3 text-gray-600">{item.systemId}</td>
+                  <td className="px-4 py-3 text-gray-600">{item.settlementPath}</td>
+                  <td className="px-4 py-3 text-gray-600">{item.purchaseMethod}</td>
+                  <td className="px-4 py-3 text-gray-600">{item.userSource1}</td>
+                  <td className="px-4 py-3 text-gray-600">{item.userSource2}</td>
+                  <td className="px-4 py-3 text-gray-600">{item.userSource3}</td>
+                  <td className="px-4 py-3 text-gray-600">{item.usedFreeVoucher}</td>
+                  <td className="px-4 py-3 text-gray-600">{item.certStatus}</td>
+                  <td className="px-4 py-3 text-gray-600">{item.certNumber}</td>
+                  <td className="px-4 py-3 text-gray-600">{item.certExpiry}</td>
+                  <td className="px-4 py-3 text-gray-600">{item.certGrantTime}</td>
                 </tr>
               ))}
             </tbody>
