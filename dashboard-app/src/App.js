@@ -242,6 +242,14 @@ const DashboardPrototype = () => {
     { name: 'AI工程师', count: 1750 }
   ];
 
+  // 示例数据：按认证统计的学习完成率（已学课时/总课时 >= 0.8 的用户占比，单位：%）
+  const completionRateByCert = [
+    { name: '云计算架构师', rate: 72.5, completed: 1784, total: 2450 },
+    { name: '数据分析师', rate: 68.9, completed: 1504, total: 2180 },
+    { name: '网络安全专家', rate: 65.3, completed: 1189, total: 1820 },
+    { name: 'AI工程师', rate: 70.1, completed: 1228, total: 1750 }
+  ];
+
   const certificateTrendData = [
     { date: '11-22', count: 95 },
     { date: '11-23', count: 108 },
@@ -428,21 +436,17 @@ const DashboardPrototype = () => {
 
             <div className="grid grid-cols-1 gap-6">
               <div className="bg-white rounded-lg shadow p-6">
-                <h3 className="text-lg font-semibold text-gray-800 mb-4">学习完成率分布</h3>
-                <ResponsiveContainer width="100%" height={300}>
-                  <BarChart data={[
-                    { range: '0-25%', count: 1850, percent: '17.6%' },
-                    { range: '25-50%', count: 2340, percent: '22.3%' },
-                    { range: '50-75%', count: 2980, percent: '28.4%' },
-                    { range: '75-100%', count: 3330, percent: '31.7%' }
-                  ]}>
+                <h3 className="text-lg font-semibold text-gray-800 mb-4">学习完成率分布（按认证）</h3>
+                <ResponsiveContainer width="100%" height={320}>
+                  <BarChart data={completionRateByCert}>
                     <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="range" />
-                    <YAxis />
-                    <Tooltip />
-                    <Bar dataKey="count" fill="#3b82f6" name="人数" />
+                    <XAxis dataKey="name" />
+                    <YAxis domain={[0, 100]} tickFormatter={value => `${value}%`} />
+                    <Tooltip formatter={(value, name) => [`${value}%`, '完成率']} />
+                    <Bar dataKey="rate" fill="#3b82f6" name="完成率 (%)" />
                   </BarChart>
                 </ResponsiveContainer>
+                <p className="text-xs text-gray-500 mt-3">完成率 = COUNT(已学课时／总课时 {'>='} 0.8) / COUNT(最后学习时间 IS NOT NULL) × 100%</p>
               </div>
 
               <div className="bg-white rounded-lg shadow p-6">
@@ -468,7 +472,7 @@ const DashboardPrototype = () => {
               </div>
 
               <div className="bg-white rounded-lg shadow p-6">
-                <h3 className="text-lg font-semibold text-gray-800 mb-4">日均新增学习人数</h3>
+                <h3 className="text-lg font-semibold text-gray-800 mb-4">学习趋势</h3>
                 <ResponsiveContainer width="100%" height={300}>
                   <LineChart data={dailyLearningData}>
                     <CartesianGrid strokeDasharray="3 3" />
