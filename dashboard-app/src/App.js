@@ -289,30 +289,7 @@ const DashboardPrototype = () => {
     { name: 'AI工程师', rate: 70.1, completed: 1228, total: 1750 }
   ];
 
-  const certificateTrendData = [
-    { date: '11-22', count: 95 },
-    { date: '11-23', count: 108 },
-    { date: '11-24', count: 102 },
-    { date: '11-25', count: 118 },
-    { date: '11-26', count: 125 },
-    { date: '11-27', count: 112 },
-    { date: '11-28', count: 120 }
-  ];
 
-  const certSubjectData = [
-    { name: '云计算架构师', count: 1980 },
-    { name: '数据分析师', count: 1750 },
-    { name: '网络安全专家', count: 1520 },
-    { name: 'AI工程师', count: 850 }
-  ];
-
-  const certUserSourceData = [
-    { name: '官网直接访问', value: 2150 },
-    { name: '微信公众号', value: 1820 },
-    { name: '企业培训', value: 1280 },
-    { name: '合作伙伴', value: 580 },
-    { name: '线下活动', value: 270 }
-  ];
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -334,9 +311,7 @@ const DashboardPrototype = () => {
             {[
               { id: 'overview', name: '总览' },
               { id: 'learning', name: '学习阶段' },
-              { id: 'registration', name: '报名阶段' },
-              { id: 'exam', name: '考试结果' },
-              { id: 'certificate', name: '持证阶段' }
+              { id: 'registration', name: '报名阶段' }
             ].map(tab => (
               <button
                 key={tab.id}
@@ -358,10 +333,10 @@ const DashboardPrototype = () => {
         {selectedTab === 'overview' && (
           <>
             <div className="grid grid-cols-4 gap-6 mb-6">
-              <MetricCard title="总学习人数" value="10,500" icon={BookOpen} />
-              <MetricCard title="总报名人数" value="8,200" icon={FileCheck} />
-              <MetricCard title="总参考人数" value="7,380" icon={Users} />
-              <MetricCard title="总持证人数" value="6,100" icon={Award} />
+              <MetricCard title="总学习次" value="10,500" icon={BookOpen} />
+              <MetricCard title="总报名人次" value="8,200" icon={FileCheck} />
+              <MetricCard title="总参考人次" value="7,380" icon={Users} />
+              <MetricCard title="总持证人次" value="6,100" icon={Award} />
             </div>
 
             <div className="mb-6">
@@ -374,7 +349,7 @@ const DashboardPrototype = () => {
                 <div className="space-y-4">
                   <div>
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm font-medium text-gray-700">总报名人数</span>
+                      <span className="text-sm font-medium text-gray-700">总报名人次</span>
                       <div className="text-right">
                         <span className="text-sm font-semibold text-gray-900">8,200 人</span>
                         <span className="text-xs text-gray-500 ml-2">(100%)</span>
@@ -395,7 +370,7 @@ const DashboardPrototype = () => {
                   </div>
                   <div>
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm font-medium text-gray-700">总参考人数</span>
+                      <span className="text-sm font-medium text-gray-700">总参考人次</span>
                       <div className="text-right">
                         <span className="text-sm font-semibold text-gray-900">7,380 人</span>
                         <span className="text-xs text-gray-500 ml-2">(90.0%)</span>
@@ -416,7 +391,7 @@ const DashboardPrototype = () => {
                   </div>
                   <div>
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm font-medium text-gray-700">总持证人数</span>
+                      <span className="text-sm font-medium text-gray-700">总持证人次</span>
                       <div className="text-right">
                         <span className="text-sm font-semibold text-gray-900">6,100 人</span>
                         <span className="text-xs text-gray-500 ml-2">(74.4%)</span>
@@ -458,18 +433,17 @@ const DashboardPrototype = () => {
         {selectedTab === 'learning' && (
           <>
             <FilterPanel filters={[
-              { label: '学习时间', default: '2025-04-01至今' },
-              { label: '认证名称', default: '全部' },
-              { label: '用户来源一级', default: '全部' },
+              { label: '学习时间', default: '全部' },
+              { label: '认证名称', default: '全部' },              { label: '所属活动ID', default: '全部' },              { label: '用户来源一级', default: '全部' },
               { label: '用户来源二级', default: '全部' },
               { label: '用户来源三级', default: '全部' }
             ]} />
 
             <div className="grid grid-cols-4 gap-6 mb-6">
               <MetricCard title="当前活跃学习人数" value="3,420" change="+15.3%" trend="up" subtitle="最后学习时间不为空的用户总数" />
-              <MetricCard title="学习完成人数" value="7,560" subtitle="不同认证已完成学习的用户总数" />
-              <MetricCard title="学习参与人数" value="10,500" subtitle="实际参加学习的用户总数" />
-              <MetricCard title="人均学习时长" value="142分钟" subtitle="所有考生平均学习时长" />
+              <MetricCard title="学习完成人次" value="7,560" subtitle="不同认证已完成学习的用户总数" />
+              <div className="bg-white rounded-lg shadow p-5 hover:shadow-lg transition-shadow h-full"></div>
+              <div className="bg-white rounded-lg shadow p-5 hover:shadow-lg transition-shadow h-full"></div>
             </div>
 
 
@@ -530,16 +504,15 @@ const DashboardPrototype = () => {
         {selectedTab === 'registration' && (
           <>
             <FilterPanel filters={[
-              { label: '报名时间', default: '2025-04-01至今' },
-              { label: '认证名称', default: '全部' },
-              { label: '用户来源一级', default: '全部' },
+              { label: '报名时间', default: '全部' },
+              { label: '认证名称', default: '全部' },              { label: '所属活动ID', default: '全部' },              { label: '用户来源一级', default: '全部' },
               { label: '用户来源二级', default: '全部' },
               { label: '用户来源三级', default: '全部' }
             ]} />
 
             <div className="grid grid-cols-4 gap-6 mb-6">
-              <MetricCard title="总报名人数" value="8,200" subtitle="所选报名时间至今报名参加考试的用户总数" />
-              <div className="bg-white rounded-lg shadow p-5 hover:shadow-lg transition-shadow h-full"></div>
+              <MetricCard title="总报名人次" value="8,200" subtitle="所选报名时间区间内报名参加考试的人次" />
+              <MetricCard title="总报名人数" value="8,200" subtitle="所选报名时间区间内报名参加考试的用户总数" />
               <div className="bg-white rounded-lg shadow p-5 hover:shadow-lg transition-shadow h-full"></div>
               <div className="bg-white rounded-lg shadow p-5 hover:shadow-lg transition-shadow h-full"></div>
             </div>
@@ -555,7 +528,7 @@ const DashboardPrototype = () => {
                     <YAxis />
                     <Tooltip />
                     <Legend />
-                    <Line type="monotone" dataKey="count" stroke="#f59e0b" strokeWidth={2} name="报名人数" />
+                    <Line type="monotone" dataKey="count" stroke="#f59e0b" strokeWidth={2} name="报名人次" />
                   </LineChart>
                 </ResponsiveContainer>
               </div>
@@ -568,7 +541,7 @@ const DashboardPrototype = () => {
                     <XAxis dataKey="name" />
                     <YAxis />
                     <Tooltip />
-                    <Bar dataKey="count" fill="#8b5cf6" name="报名人数" />
+                    <Bar dataKey="count" fill="#8b5cf6" name="报名人次" />
                   </BarChart>
                 </ResponsiveContainer>
               </div>
@@ -576,115 +549,9 @@ const DashboardPrototype = () => {
           </>
         )}
 
-        {selectedTab === 'exam' && (
-          <>
-            <FilterPanel filters={[
-              { label: '考试时间', default: '2025-04-01至今' },
-              { label: '认证名称', default: '全部' },
-              { label: '用户来源一级', default: '全部' },
-              { label: '用户来源二级', default: '全部' },
-              { label: '用户来源三级', default: '全部' }
-            ]} />
-
-            <div className="grid grid-cols-4 gap-6 mb-6">
-              <MetricCard title="总参考人数" value="7,380" subtitle="实际参加考试的用户总数" />
-              <MetricCard title="平均参考次数" value="1.2次" subtitle="每个考生平均参考多少次" />
-              <MetricCard title="考试通过率" value="82.7%" subtitle="通过考试的用户占参加考试的用户总数的百分比" />
-              <MetricCard title="使用免费代金券考试通过率" value="85.2%" subtitle="使用代金券且考试通过的用户数/使用代金券且完成考试的用户总数" />
-            </div>
 
 
-            <div className="grid grid-cols-1 gap-6">
-              <div className="bg-white rounded-lg shadow p-6">
-                <h3 className="text-lg font-semibold text-gray-800 mb-4">考试通过率分布-认证</h3>
-                <ResponsiveContainer width="100%" height={300}>
-                  <BarChart data={certificationData}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="name" />
-                    <YAxis />
-                    <Tooltip />
-                    <Bar dataKey="count" fill="#3b82f6" name="通过人数" />
-                  </BarChart>
-                </ResponsiveContainer>
-              </div>
 
-              <div className="bg-white rounded-lg shadow p-6">
-                <h3 className="text-lg font-semibold text-gray-800 mb-4">考试通过率分布-用户来源</h3>
-                <ResponsiveContainer width="100%" height={300}>
-                  <BarChart data={userSourceData}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="name" />
-                    <YAxis />
-                    <Tooltip />
-                    <Bar dataKey="value" fill="#10b981" name="通过人数" />
-                  </BarChart>
-                </ResponsiveContainer>
-              </div>
-            </div>
-          </>
-        )}
-
-        {selectedTab === 'certificate' && (
-          <>
-            <FilterPanel filters={[
-              { label: '发证时间', default: '2025-04-01至今' },
-              { label: '认证名称', default: '全部' },
-              { label: '用户来源一级', default: '全部' },
-              { label: '用户来源二级', default: '全部' },
-              { label: '用户来源三级', default: '全部' }
-            ]} />
-
-            <div className="grid grid-cols-4 gap-6 mb-6">
-              <MetricCard title="持证人数" value="6,100" subtitle="获得证书的用户总数" />
-              <MetricCard title="有效持证人数" value="5,985" subtitle="获得证书且证书在有效期内的用户总数" />
-              <div className="bg-white rounded-lg shadow p-5 hover:shadow-lg transition-shadow h-full"></div>
-              <div className="bg-white rounded-lg shadow p-5 hover:shadow-lg transition-shadow h-full"></div>
-            </div>
-
-
-            <div className="grid grid-cols-1 gap-6">
-              <div className="bg-white rounded-lg shadow p-6">
-                <h3 className="text-lg font-semibold text-gray-800 mb-4">发证趋势</h3>
-                <ResponsiveContainer width="100%" height={300}>
-                  <LineChart data={certificateTrendData}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="date" />
-                    <YAxis />
-                    <Tooltip />
-                    <Legend />
-                    <Line type="monotone" dataKey="count" stroke="#ec4899" strokeWidth={2} name="发证数量" />
-                  </LineChart>
-                </ResponsiveContainer>
-              </div>
-
-              <div className="bg-white rounded-lg shadow p-6">
-                <h3 className="text-lg font-semibold text-gray-800 mb-4">证书科目分布</h3>
-                <ResponsiveContainer width="100%" height={300}>
-                  <BarChart data={certSubjectData}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="name" />
-                    <YAxis />
-                    <Tooltip />
-                    <Bar dataKey="count" fill="#14b8a6" name="持证人数" />
-                  </BarChart>
-                </ResponsiveContainer>
-              </div>
-
-              <div className="bg-white rounded-lg shadow p-6">
-                <h3 className="text-lg font-semibold text-gray-800 mb-4">持证用户来源分布</h3>
-                <ResponsiveContainer width="100%" height={300}>
-                  <BarChart data={certUserSourceData}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="name" />
-                    <YAxis />
-                    <Tooltip />
-                    <Bar dataKey="value" fill="#f97316" name="持证人数" />
-                  </BarChart>
-                </ResponsiveContainer>
-              </div>
-            </div>
-          </>
-        )}
       </div>
     </div>
   );
