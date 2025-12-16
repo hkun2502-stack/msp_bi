@@ -333,7 +333,7 @@ const DashboardPrototype = () => {
         {selectedTab === 'overview' && (
           <>
             <div className="grid grid-cols-4 gap-6 mb-6">
-              <MetricCard title="总学习次" value="10,500" icon={BookOpen} />
+              <MetricCard title="总学习人次" value="10,500" icon={BookOpen} />
               <MetricCard title="总报名人次" value="8,200" icon={FileCheck} />
               <MetricCard title="总参考人次" value="7,380" icon={Users} />
               <MetricCard title="总持证人次" value="6,100" icon={Award} />
@@ -345,7 +345,7 @@ const DashboardPrototype = () => {
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div className="bg-white rounded-lg shadow p-6">
-                <h3 className="text-lg font-semibold text-gray-800 mb-6">全流程转化漏斗</h3>
+                <h3 className="text-lg font-semibold text-gray-800 mb-6">报名-持证转化漏斗</h3>
                 <div className="space-y-4">
                   <div>
                     <div className="flex items-center justify-between mb-2">
