@@ -37,22 +37,59 @@ const DashboardPrototype = () => {
     </div>
   );
 
-  const FilterPanel = ({ filters }) => (
+  const FilterPanel = ({ filters, values = {}, onChange = () => {}, onReset = () => {}, onApply = () => {}, showApply = false }) => (
     <div className="bg-white rounded-lg shadow p-4 mb-6">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
           <Filter className="w-5 h-5 text-gray-600" />
           <h3 className="font-semibold text-gray-800">筛选条件</h3>
         </div>
-        <button className="text-blue-600 text-sm hover:text-blue-700">重置</button>
+        <div className="flex items-center gap-3">
+          <button onClick={onReset} className="text-blue-600 text-sm hover:text-blue-700">重置</button>
+          {showApply && (
+            <button onClick={onApply} className="px-3 py-1 bg-blue-600 text-white rounded-md text-sm hover:bg-blue-700">应用</button>
+          )}
+        </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
         {filters.map((filter, idx) => (
-          <div key={idx}>
+          <div key={filter.key ?? idx}>
             <label className="block text-sm text-gray-600 mb-1">{filter.label}</label>
-            <select className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-              <option>{filter.default}</option>
-            </select>
+            {/* date range */}
+            {filter.type === 'dateRange' ? (
+              <div className="flex items-center gap-2">
+                <input
+                  type="date"
+                  value={values[filter.key]?.start || ''}
+                  onChange={(e) => onChange(filter.key, { ...(values[filter.key] || {}), start: e.target.value })}
+                  className="w-1/2 px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                <input
+                  type="date"
+                  value={values[filter.key]?.end || ''}
+                  onChange={(e) => onChange(filter.key, { ...(values[filter.key] || {}), end: e.target.value })}
+                  className="w-1/2 px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+            ) : filter.type === 'select' && filter.options ? (
+              <select
+                value={values[filter.key] ?? filter.default}
+                onChange={(e) => onChange(filter.key, e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                {filter.options.map((opt) => (
+                  <option key={opt} value={opt}>{opt}</option>
+                ))}
+              </select>
+            ) : (
+              <select
+                value={values[filter.key] ?? filter.default}
+                onChange={(e) => onChange(filter.key, e.target.value)}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                <option>{filter.default}</option>
+              </select>
+            )}
           </div>
         ))}
       </div>
@@ -82,21 +119,86 @@ const DashboardPrototype = () => {
       }
     ];
 
-    const totalPages = Math.ceil(lifecycleTableData.length / itemsPerPage);
+    // filter state
+    const [tableFilters, setTableFilters] = useState({
+      certName: '全部',
+      lastLearnTime: { start: '', end: '' },
+      registerTime: { start: '', end: '' },
+      examTime: { start: '', end: '' },
+      activityId: '',
+      userSource1: '全部'
+    });
+
+    const certOptions = ['全部', ...Array.from(new Set(lifecycleTableData.map(i => i.certName)))]
+    const userSourceOptions = ['全部', '内部员工', '生态员工', '外部客户'];
+
+    const handleFilterChange = (key, value) => {
+      setTableFilters(prev => ({ ...prev, [key]: value }));
+    };
+
+    const handleReset = () => {
+      setTableFilters({ certName: '全部', lastLearnTime: { start: '', end: '' }, registerTime: { start: '', end: '' }, examTime: { start: '', end: '' }, activityId: '', userSource1: '全部' });
+      setCurrentPage(1);
+    };
+
+    const handleApply = () => {
+      setCurrentPage(1);
+    };
+
+    const parseDate = (s) => {
+      if (!s) return null;
+      // accept formats like '2025-11-28 10:12' or '2025-11-28'
+      const d = new Date(s.length === 10 ? s + 'T00:00:00' : s.replace(' ', 'T'));
+      if (isNaN(d.getTime())) return null;
+      return d;
+    };
+
+    const inRange = (itemDateStr, range) => {
+      if (!range) return true;
+      const { start, end } = range;
+      if (!start && !end) return true;
+      const d = parseDate(itemDateStr);
+      if (!d) return false;
+      if (start) {
+        const s = new Date(start + 'T00:00:00');
+        if (d < s) return false;
+      }
+      if (end) {
+        const e = new Date(end + 'T23:59:59');
+        if (d > e) return false;
+      }
+      return true;
+    };
+
+    const matchesFilters = (item) => {
+      if (tableFilters.certName && tableFilters.certName !== '全部' && item.certName !== tableFilters.certName) return false;
+      if (tableFilters.activityId && tableFilters.activityId !== '全部' && tableFilters.activityId !== '' && item.activityId !== tableFilters.activityId) return false;
+      if (tableFilters.userSource1 && tableFilters.userSource1 !== '全部' && item.userSource1 !== tableFilters.userSource1) return false;
+
+      if (!inRange(item.lastLearnTime, tableFilters.lastLearnTime)) return false;
+      if (!inRange(item.registerTime, tableFilters.registerTime)) return false;
+      if (!inRange(item.examTime, tableFilters.examTime)) return false;
+
+      return true;
+    };
+
+    const filteredData = lifecycleTableData.filter(matchesFilters);
+
+    const totalPages = Math.max(1, Math.ceil(filteredData.length / itemsPerPage));
     const startIndex = (currentPage - 1) * itemsPerPage;
-    const paginatedData = lifecycleTableData.slice(startIndex, startIndex + itemsPerPage);
+    const paginatedData = filteredData.slice(startIndex, startIndex + itemsPerPage);
 
     const handleDownload = () => {
-      const csv = [
-        ['用户UIN','认证名称','开始时间','最后学习时间','视频时长(分钟)','总学习时长(分钟)','总课时','已学课时','是否完成学习','考试UIN','用户来源','Name','企微id','考试类型','考试语言','考试时长','ExamCode','报名时间','考试时间','考场名称','考试方式','考试码','资格码','考试状态','分数','所属活动ID','导入原因','备注','系统编号','结算路径','购买方式','用户来源一级','用户来源二级','用户来源三级','是否使用免费代金券','证书状态','证书编号','证书失效时间','证书授予时间'],
-        ...lifecycleTableData.map(item => [
-          item.uin, item.certName, item.startTime, item.lastLearnTime, item.videoDurationMin, item.totalLearnMinutes, item.totalLessons, item.learnedLessons, item.isCompleted,
-          item.examUin, item.userSource, item.name, item.weworkId, item.examType, item.examLang, item.examDuration, item.ExamCode, item.registerTime, item.examTime, item.venueName,
-          item.examMethod, item.examCode, item.qualificationCode, item.examStatus, item.score, item.activityId, item.importReason, item.notes, item.systemId, item.settlementPath,
-          item.purchaseMethod, item.userSource1, item.userSource2, item.userSource3, item.usedFreeVoucher, item.certStatus, item.certNumber, item.certExpiry, item.certGrantTime
-        ])
-      ].map(row => row.join(',')).join('\n');
-      
+      const csvHeader = ['用户UIN','认证名称','开始时间','最后学习时间','视频时长(分钟)','总学习时长(分钟)','总课时','已学课时','是否完成学习','考试UIN','用户来源','Name','企微id','考试类型','考试语言','考试时长','ExamCode','报名时间','考试时间','考场名称','考试方式','考试码','资格码','考试状态','分数','所属活动ID','导入原因','备注','系统编号','结算路径','购买方式','用户来源一级','用户来源二级','用户来源三级','是否使用免费代金券','证书状态','证书编号','证书失效时间','证书授予时间'];
+
+      const rows = [csvHeader, ...filteredData.map(item => [
+        item.uin, item.certName, item.startTime, item.lastLearnTime, item.videoDurationMin, item.totalLearnMinutes, item.totalLessons, item.learnedLessons, item.isCompleted,
+        item.examUin, item.userSource, item.name, item.weworkId, item.examType, item.examLang, item.examDuration, item.ExamCode, item.registerTime, item.examTime, item.venueName,
+        item.examMethod, item.examCode, item.qualificationCode, item.examStatus, item.score, item.activityId, item.importReason, item.notes, item.systemId, item.settlementPath,
+        item.purchaseMethod, item.userSource1, item.userSource2, item.userSource3, item.usedFreeVoucher, item.certStatus, item.certNumber, item.certExpiry, item.certGrantTime
+      ])];
+
+      const csv = rows.map(r => r.join(',')).join('\n');
       const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
       const link = document.createElement('a');
       link.href = URL.createObjectURL(blob);
@@ -108,14 +210,32 @@ const DashboardPrototype = () => {
       <div className="bg-white rounded-lg shadow p-6">
         <div className="flex items-center justify-between mb-6">
           <h3 className="text-lg font-semibold text-gray-800">用户学习-报名-考试-持证全生命周期数据总表</h3>
-          <button 
-            onClick={handleDownload}
-            className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm font-medium transition-all"
-          >
-            <Download className="w-4 h-4" />
-            下载数据
-          </button>
+          <div className="flex items-center gap-3">
+            <button 
+              onClick={handleDownload}
+              className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm font-medium transition-all"
+            >
+              <Download className="w-4 h-4" />
+              下载数据
+            </button>
+          </div>
         </div>
+
+        <FilterPanel
+          filters={[
+            { key: 'certName', label: '认证名称', default: '全部', type: 'select', options: certOptions },
+            { key: 'lastLearnTime', label: '最后学习时间', type: 'dateRange' },
+            { key: 'registerTime', label: '报名时间', type: 'dateRange' },
+            { key: 'examTime', label: '考试时间', type: 'dateRange' },
+            { key: 'activityId', label: '所属活动ID', default: '全部' },
+            { key: 'userSource1', label: '用户来源一级', type: 'select', options: userSourceOptions }
+          ]}
+          values={tableFilters}
+          onChange={handleFilterChange}
+          onReset={handleReset}
+          onApply={handleApply}
+          showApply={true}
+        />
 
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
@@ -433,15 +553,15 @@ const DashboardPrototype = () => {
         {selectedTab === 'learning' && (
           <>
             <FilterPanel filters={[
-              { label: '学习时间', default: '全部' },
-              { label: '认证名称', default: '全部' },              { label: '所属活动ID', default: '全部' },              { label: '用户来源一级', default: '全部' },
+              { label: '最后学习时间', default: '全部' },
+              { label: '认证名称', default: '全部' },              { label: '所属活动ID（代金券使用情况）', default: '全部' },              { label: '用户来源一级（内部员工、生态员工、外部客户）', default: '全部' },
               { label: '用户来源二级', default: '全部' },
               { label: '用户来源三级', default: '全部' }
             ]} />
 
             <div className="grid grid-cols-4 gap-6 mb-6">
               <MetricCard title="当前活跃学习人数" value="3,420" change="+15.3%" trend="up" subtitle="最后学习时间不为空的用户总数" />
-              <MetricCard title="学习完成人次" value="7,560" subtitle="不同认证已完成学习的用户总数" />
+              <MetricCard title="学习完成人次" value="7,560" subtitle="单个用户在单门认证课程的学习进度达到80%及以上时计为1人次" />
               <div className="bg-white rounded-lg shadow p-5 hover:shadow-lg transition-shadow h-full"></div>
               <div className="bg-white rounded-lg shadow p-5 hover:shadow-lg transition-shadow h-full"></div>
             </div>
@@ -505,14 +625,14 @@ const DashboardPrototype = () => {
           <>
             <FilterPanel filters={[
               { label: '报名时间', default: '全部' },
-              { label: '认证名称', default: '全部' },              { label: '所属活动ID', default: '全部' },              { label: '用户来源一级', default: '全部' },
+              { label: '认证名称', default: '全部' },              { label: '所属活动ID（代金券使用情况）', default: '全部' },              { label: '用户来源一级（内部员工、生态员工、外部客户）', default: '全部' },
               { label: '用户来源二级', default: '全部' },
               { label: '用户来源三级', default: '全部' }
             ]} />
 
             <div className="grid grid-cols-4 gap-6 mb-6">
-              <MetricCard title="总报名人次" value="8,200" subtitle="所选报名时间区间内报名参加考试的人次" />
-              <MetricCard title="总报名人数" value="8,200" subtitle="所选报名时间区间内报名参加考试的用户总数" />
+              <MetricCard title="总报名人次" value="8,200" subtitle="所选报名时间区间内报名考试的人次" />
+              <MetricCard title="总报名人数" value="8,200" subtitle="所选报名时间区间内报名考试的用户总数" />
               <div className="bg-white rounded-lg shadow p-5 hover:shadow-lg transition-shadow h-full"></div>
               <div className="bg-white rounded-lg shadow p-5 hover:shadow-lg transition-shadow h-full"></div>
             </div>
