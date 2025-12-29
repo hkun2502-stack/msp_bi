@@ -227,8 +227,8 @@ const DashboardPrototype = () => {
             { key: 'lastLearnTime', label: '最后学习时间', type: 'dateRange' },
             { key: 'registerTime', label: '报名时间', type: 'dateRange' },
             { key: 'examTime', label: '考试时间', type: 'dateRange' },
-            { key: 'activityId', label: '所属活动ID', default: '全部' },
-            { key: 'userSource1', label: '用户来源一级', type: 'select', options: userSourceOptions }
+            { key: 'activityId', label: '所属活动ID（代金券使用情况）', default: '全部' },
+            { key: 'userSource1', label: '用户来源一级（内部员工、生态员工、外部客户）', type: 'select', options: userSourceOptions }
           ]}
           values={tableFilters}
           onChange={handleFilterChange}
